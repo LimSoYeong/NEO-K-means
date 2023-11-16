@@ -35,15 +35,24 @@ if csv_file is not None:
     df = pd.read_csv('csv/'+filename)
     # st.dataframe(df)
 
-if csv_file is not None:
+if csv_file is not None: # csv파일을 선택하면
     # 사용자에게 보여줄 칼럼을 선택
     st.subheader('고객 세그멘테이션')
     selected_columns = st.sidebar.multiselect('원하는 칼럼을 선택하세요', df.columns)
+    k = st.sidebar.slider("군집개수를 선택하세요.", 2, 10)
+
     # 선택된 칼럼에 해당하는 데이터프레임 표시
     if selected_columns:
         st.write(df[selected_columns])
+        neo_df = df[selected_columns].dropna(axis=0) # 결측행 제거
+        neo_df.reset_index() # 인덱스 초기화
+        num_columns = neo_df.select_dtypes(include=np.number).columns.tolist() # 수치형 변수만 선택
+        num_df = neo_df[num_columns]
+        num_df = np.array(num_df) # array로 만들어야 돌아감
+
+        U = main.cluster(num_df, k)
+        U_df = pd.DataFrame(U)
+        st.write(U_df)
+
     else:
         st.write('칼럼을 선택하세요.')
-
-
-st.write(df)
