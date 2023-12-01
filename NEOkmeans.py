@@ -1,6 +1,5 @@
 import numpy as np
 
-
 def estimate_alpha_beta(X, C, alpha_delta=1.1, beta_delta=6): # X(n*m), C(k*m) : 행렬 /  delta :상수 값
   n = X.shape[0]        # 데이터 개수
   k = C.shape[0]        # centroid 수
