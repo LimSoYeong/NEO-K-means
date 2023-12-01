@@ -27,7 +27,7 @@ def calc_diff(A, B):
 class Kmeans(object):
     def __init__(self, k, max_iter=10, tol=1e-4):
         '''
-        입력
+        Arguments
         - k : 클러스터 수
         - max_iter = iteration 최대 수
         - tol = Update Tolerance, centroid 업데이트가 tol보다 작아지면 fit 중단
@@ -69,9 +69,11 @@ class Kmeans(object):
 
     def fit(self, X):
         '''
-        입력 :  Array of [10000, 16]
-        assignments : 각 벡터의 클러스터 할당
-        centroids
+        Arguments 
+        - X : Array of [10000, 16]
+        Returns
+        - assignments : 각 벡터의 클러스터 할당
+        - centroids : 각 클러스터의 중심점
         '''
         self.centroids = self.random_init(X)
         for iter in range(self.max_iter):
