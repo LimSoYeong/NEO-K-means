@@ -1,7 +1,7 @@
 import main
 import numpy as np
 import pandas as pd
-import NEOclustering as st
+import streamlit as st
 import os
 from datetime import datetime
 from sklearn.preprocessing import StandardScaler
