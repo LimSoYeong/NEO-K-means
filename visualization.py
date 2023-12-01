@@ -1,4 +1,4 @@
-from NEOK import *
+from NEOkmeans import *
 from kmeans import *
 from main import *
 from sklearn.preprocessing import LabelEncoder
@@ -10,7 +10,7 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-df = pd.read_csv("/content/drive/MyDrive//Train.csv")
+# df = pd.read_csv("/content/drive/MyDrive//Train.csv")
 
 def label_preprocessing(df) :
     '''
@@ -33,10 +33,9 @@ def label_preprocessing(df) :
     scaler = StandardScaler()   # 표준화
     df_scaled = scaler.fit_transform(df)    # array
 
-    X_df = pd.DataFrame(df_scaled)      #PCA
-    pca = PCA(n_components=2)
+    X_df = pd.DataFrame(df_scaled)      
+    pca = PCA(n_components=2) # PCA
     df_pca = pca.fit_transform(X_df)
-
     df_pca = pd.DataFrame(df_pca, columns=['pca_x', 'pca_y'])
     arr_pca = np.array(df_pca)
 
@@ -44,10 +43,10 @@ def label_preprocessing(df) :
 
     return df_pca, arr_pca
 
-df_pca, arr_pca = label_preprocessing(df.iloc[:,:-1])
-k = 3
+# df_pca, arr_pca = label_preprocessing(df.iloc[:,:-1])
+# k = 3
 
-NEOU = cluster(arr_pca, k)
+# NEOU = cluster(arr_pca, k)
 
 # make NEOU dataFrame and concat
 def create_U_dataframe(k, NEOU,df_pca): #np.array NEOU
@@ -66,7 +65,7 @@ def create_U_dataframe(k, NEOU,df_pca): #np.array NEOU
 
     return grouped_final_df, columns
 
-grouped_final_df, U_columns = create_U_dataframe(k, NEOU, df_pca)
+# grouped_final_df, U_columns = create_U_dataframe(k, NEOU, df_pca)
 
 # 군집 시각화
 def display_cluster_2d(grouped_final_df, k) :
@@ -83,8 +82,9 @@ def display_cluster_2d(grouped_final_df, k) :
             color = 'black'
             marker = '+'
             continue
+
         print(f'cluster group : {group_key}, color : {color}, marker : {marker}')
-        plt.scatter(group_data['pca_x'], group_data['pca_y'], color=color, marker=marker)
+        plt.plot(group_data['pca_x'], group_data['pca_y'], color=color, marker=marker, linestyle='', label=f'Cluster {group_key}')
 
     plt.xlabel('pca_x')
     plt.ylabel('pca_y')
@@ -92,7 +92,7 @@ def display_cluster_2d(grouped_final_df, k) :
     plt.legend()
     plt.show()
 
-display_cluster_2d(grouped_final_df, k)
+# display_cluster_2d(grouped_final_df, k)
 
 # 특징 시각화
 def feature_display(df, column, k) :
@@ -130,10 +130,10 @@ def feature_display(df, column, k) :
         df['cluster'] = np.argmax(df[cols].values, axis=1) + 1
 
         sns.violinplot(x="cluster", y=column, data=df, palette="Set2")
-        ax.set_title(f'Swarm Plot of {column} across Clusters')
+        ax.set_title(f'Violin Plot of {column} across Clusters')
         ax.set_xlabel('Cluster')
         ax.set_ylabel(column)
 
     plt.show()
 
-feature_display(grouped_final_df,'Var_1',k)
+# feature_display(grouped_final_df,'Var_1',k)
