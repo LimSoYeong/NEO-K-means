@@ -2,7 +2,7 @@ from NEOK import *
 from kmeans import *
 from main import *
 from sklearn.preprocessing import LabelEncoder
-from sklearn.preprocessing import StandardScaler
+from sklearn.preprocessing import RobustScaler
 from sklearn.decomposition import PCA
 import copy
 import numpy as np
@@ -23,14 +23,14 @@ def label_preprocessing(df) :
     id_col = [col for col in df.columns if 'id' in col.lower()]   # ID 열이 존재하면 삭제
     df = df.drop(id_col, axis=1)
 
-    df = df.apply(lambda x: x.fillna(x.mode()[0])) # 최빈값으로 대체
+    df = df.apply(lambda x: x.fillna(x.mode()[0]) if x.dtype == 'O' else x.fillna(x.median())) # 최빈값으로 대체
 
     df_org = copy.deepcopy(df)
     cat_cols = df.select_dtypes(include=['category', 'object']).columns.tolist()
     label_encoder = LabelEncoder()
     df[cat_cols] = df[cat_cols].apply(lambda col: label_encoder.fit_transform(col))
 
-    scaler = StandardScaler()   # 표준화
+    scaler = RobustScaler()   # 표준화
     df_scaled = scaler.fit_transform(df)    # array
 
     X_df = pd.DataFrame(df_scaled)      #PCA
