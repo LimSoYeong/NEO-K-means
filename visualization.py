@@ -23,7 +23,7 @@ def label_preprocessing(df) :
     id_col = [col for col in df.columns if 'id' in col.lower()]   # ID 열이 존재하면 삭제
     df = df.drop(id_col, axis=1)
 
-    df = df.apply(lambda x: x.fillna(x.mode()[0]) if x.dtype == 'O' else x.fillna(x.median())) # 최빈값으로 대체
+    df = df.apply(lambda x: x.fillna(x.mode()[0]) if x.dtype == 'O' else x.fillna(x.median())) # 최빈값/중앙값으로 대체
 
     df_org = copy.deepcopy(df)
     cat_cols = df.select_dtypes(include=['category', 'object']).columns.tolist()
