@@ -105,7 +105,7 @@ class Kmeans(object):
             data_indices = list(filter(lambda x: self.assignments[x] == i, range(len(self.assignments))))
 
             if len(data_indices) == 0:
-                r = random.randint(0, len(X))
+                r = random.randint(0, len(X)-1)
                 self.centroids[i] = X[r]
                 continue
 
