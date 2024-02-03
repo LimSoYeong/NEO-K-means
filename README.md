@@ -19,6 +19,10 @@
 # **🔎 프로젝트 기능**
 * 원하는 데이터를 입력, 원하는 변수 선택, 클러스터 개수 K 선택하면 자동으로 NEO K-means 클러스터링 결과 시각화
 * 범주형/연속형 각각 클러스터별 특징 시각화
+* [발표 PPT 보러가기](https://github.com/LimSoYeong/NEO-K-means/blob/8c1dccef0d1dea3ade0456398c5fe9cde1830307/%5B%E1%84%89%E1%85%A1%E1%86%AB%E1%84%80%E1%85%A7%E1%86%BC%E1%84%8B%E1%85%A1%E1%86%AF%5D%20%E1%84%91%E1%85%B3%E1%84%85%E1%85%A9%E1%84%8C%E1%85%A6%E1%86%A8%E1%84%90%E1%85%B3%20PPT-NEO%20kmeans.pdf)
+ <img width="1022" alt="Screenshot 2024-02-03 at 11 33 27 AM" src="https://github.com/LimSoYeong/NEO-K-means/assets/89073323/220280bf-46e7-4ce4-9b39-cd5fc98c78a1">
+
+
 
 <br>
 
